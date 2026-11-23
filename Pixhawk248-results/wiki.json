@@ -1,0 +1,92 @@
+[
+  {
+    "id": "W01",
+    "topic": "辨認板子",
+    "question": "2.4.8 這串數字代表什麼？",
+    "idea": "RadioLink 在硬體比較表中用 2.4.8 標示自家的 PIXHAWK。看到這個數字時，第一步是記下廠牌與板上標示，再找對應手冊。",
+    "example": "同學只給你一張寫著「2.4.8」的外殼照片。你可以記錄型號，但要回答接頭腳位，還需要廠牌與對應版本的文件。",
+    "url": "https://www.radiolink.com/en/comparison_of_pixhawk_series",
+    "source": "RadioLink｜Comparison of PIXHAWK Series",
+    "points": [
+      "讀板上標示",
+      "確認製造商",
+      "找同版手冊"
+    ],
+    "summary": "只知道 2.4.8 時，先記錄廠牌，再查接頭定義。"
+  },
+  {
+    "id": "W02",
+    "topic": "讀懂名稱",
+    "question": "Pixhawk 1、FMUv2 和 PX4 各指什麼？",
+    "idea": "Pixhawk 1 是飛控產品名稱，FMUv2 是它採用的參考硬體設計；PX4 則是可以在支援硬體上執行的飛控軟體。",
+    "example": "閱讀文件時先看它在描述哪一層。找電路設計看硬體文件；想知道軟體如何算出控制指令，就讀 PX4 架構。",
+    "url": "https://github.com/pixhawk/Hardware/blob/master/README.md",
+    "source": "Pixhawk｜Hardware · FMU Versions",
+    "points": [
+      "產品名稱",
+      "參考硬體設計",
+      "飛控軟體"
+    ],
+    "summary": "查資料前，先判斷問題屬於硬體還是軟體。"
+  },
+  {
+    "id": "W03",
+    "topic": "理解控制",
+    "question": "一陣風吹斜四軸機，飛控怎麼知道要修正？",
+    "idea": "感測器提供量測值，估測器據此推算機身姿態；控制器比較目標與估測值，產生修正指令。下一次量測會反映修正後的狀態。",
+    "example": "假設目標是保持水平。風吹後，估測姿態向右傾，控制器依偏差要求修正；每次更新姿態，都會重新計算還需要多少修正。",
+    "url": "https://docs.px4.io/main/en/concept/architecture",
+    "source": "PX4｜Architectural Overview",
+    "points": [
+      "量測姿態相關訊號",
+      "估測機身姿態",
+      "依目標偏差修正"
+    ],
+    "summary": "每一次修正後再量測，這就是回授。"
+  },
+  {
+    "id": "W04",
+    "topic": "認識周邊",
+    "question": "同一顆 GPS／羅盤模組，為什麼有兩種資料？",
+    "idea": "GPS 提供衛星定位資料，羅盤量測磁場，協助估算機頭朝向。經典 3DR Pixhawk 文件的組合模組分別使用 GPS 與 I²C 介面。",
+    "example": "把機身留在桌上原地轉向：位置幾乎一樣，機頭卻已改變方向。這說明位置與朝向是兩個不同的問題。此處的介面是參考機案例。",
+    "url": "https://docs.px4.io/main/en/assembly/quick_start_pixhawk",
+    "source": "PX4｜Pixhawk Wiring Quick Start · GPS + Compass",
+    "points": [
+      "GPS 回答位置",
+      "羅盤協助估算航向",
+      "查模組與主板介面"
+    ],
+    "summary": "機身的位置和機頭的方向可以分別改變。"
+  },
+  {
+    "id": "W05",
+    "topic": "判讀校正",
+    "question": "為什麼校正羅盤時要轉動機身？",
+    "idea": "磁力計量測磁場。QGroundControl 會提示使用者改變姿態，再繞指定軸旋轉，讓系統取得不同方向的磁場讀值。",
+    "example": "若把羅盤放在磁場異常的地方，觀察到的方向也可能受到影響。判讀羅盤問題時，應把量測環境一起記錄。",
+    "url": "https://docs.px4.io/main/en/config/compass",
+    "source": "PX4｜Compass Calibration",
+    "points": [
+      "讀取磁場",
+      "依提示轉動",
+      "留意環境干擾"
+    ],
+    "summary": "校正羅盤要取得多個方向的磁場讀值。"
+  },
+  {
+    "id": "W06",
+    "topic": "比較感測器",
+    "question": "為什麼加速度計校正時反而要放穩？",
+    "idea": "在不同姿態下靜置機身，重力在感測器各軸上的分量會改變。校正需要各姿態穩定的讀值，QGroundControl 會提示何時換面。",
+    "example": "若畫面提示保持靜止，持續轉動會破壞這次量測的條件。可以用「羅盤轉動、加速度計分面靜置」記住兩種校正動作。",
+    "url": "https://docs.px4.io/main/en/config/accelerometer",
+    "source": "PX4｜Accelerometer Calibration",
+    "points": [
+      "依提示換面",
+      "每面保持靜止",
+      "等待取樣完成"
+    ],
+    "summary": "校正加速度計時，每一面都要有穩定的量測。"
+  }
+]
